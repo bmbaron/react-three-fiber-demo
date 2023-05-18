@@ -1,42 +1,39 @@
 import * as React from "react";
-import {Canvas, useFrame} from "@react-three/fiber";
-import {useEffect, useRef} from "react";
+import {Canvas} from "@react-three/fiber";
 import styled from "styled-components"
-import {OrbitControls, RoundedBox, Environment, PerspectiveCamera, useGLTF} from "@react-three/drei";
-import {Mesh} from "three";
+import {OrbitControls, Environment, PerspectiveCamera, Stars, Sparkles} from "@react-three/drei";
 import {FrenchCoatHanger} from "./3dComponents/FrenchCoatHanger";
+import {RotatingBox} from "./3dComponents/RotatingBox";
+import {Physics, usePlane} from "@react-three/cannon";
+import {Plane} from "./3dComponents/Plane";
 
 export default function App() {
+
     const size = 2;
-
-    const RotatingBox = () => {
-        const boxRef = useRef();
-
-        useFrame(() => {
-            if (boxRef.current) {
-                boxRef.current.rotation.y += 0.01;
-            }
-        });
-
-        return (
-            <RoundedBox position={[-2,4,-0.5]} ref={boxRef} args={[size, size, size]} radius={0.1} rotation-x={Math.PI * 0.25} rotation-y={Math.PI * 0.25}>
-                <meshLambertMaterial attach="material" color={"red"} />
-            </RoundedBox>
-        )
-    }
 
 
     return (
         <Container>
-        <Canvas>
+        <Canvas shadows>
             <Environment files="./public/mud_road_puresky_1k.hdr" background blur={0} />
             <PerspectiveCamera makeDefault position={[0, 0, 10]} fov={50} rotation={[0, 0.4, 0]} />
-            <ambientLight />
-            <pointLight position={[10, 10, 10]} intensity={2} color="#fff"/>
-            <pointLight position={[10, 5, 5]} intensity={2} color="#fff"/>
-            <FrenchCoatHanger color="#fff" scale={0.1}/>
-            <RotatingBox />
+            {/*<ambientLight />*/}
+            <pointLight
+                castShadow
+                shadowCameraVisible
+                position={[0, 10, 0]}
+                intensity={2}
+                color="white"
+            />
+            {/*<Sparkles scale={5} count={100} size={3} noise={2} speed={2}/>*/}
+            {/*<Stars />*/}
+            {/*<FrenchCoatHanger color="#fff" scale={0.1}/>*/}
+            <Physics>
+                <RotatingBox data={{size: 1, castShadow: true}}/>
+                <Plane />
+            </Physics>
             <OrbitControls enableDamping={false} />
+
         </Canvas>
         </Container>
     );
