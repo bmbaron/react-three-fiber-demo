@@ -1,6 +1,6 @@
 import {useRef} from "react";
 import {useFrame} from "@react-three/fiber";
-import {RoundedBox} from "@react-three/drei";
+import {RoundedBox, useKeyboardControls} from "@react-three/drei";
 import * as React from "react";
 import {useBox} from "@react-three/cannon";
 
@@ -14,12 +14,23 @@ type RotatingBoxProps = {
 export const RotatingBox = ({data}: RotatingBoxProps) => {
     const {size, castShadow} = data;
     const boxRef = useRef <any>();
-    const [ref, api] = useBox <any>(() => ({mass: 0.0001}))
+    const [ref, api] = useBox <any>(() => ({mass: 0.0005}))
+    const [subscribeKeys, getKeys] = useKeyboardControls();
+
+
+
 
     useFrame(() => {
-        if (boxRef.current) {
-            boxRef.current.rotation.y += 0.01;
-        }
+        const { moveForward, moveBackward, moveLeft, moveRight, jump } = getKeys();
+        if(jump && ref.current) api.velocity.set(0,5,0)
+        if(moveForward && ref.current) api.velocity.set(0,0,-5)
+        if(moveBackward && ref.current) api.velocity.set(0,0,5)
+        if(moveLeft && ref.current) api.velocity.set(-5,0,0)
+        if(moveRight && ref.current) api.velocity.set(5,0,0)
+
+        // if (boxRef.current) {
+        //     boxRef.current.rotation.y += 0.01;
+        // }
     });
 
     return (
