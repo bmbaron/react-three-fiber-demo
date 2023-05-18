@@ -1,5 +1,5 @@
-import * as React from "react";
 import {usePlane} from "@react-three/cannon";
+import {GradientTexture} from "@react-three/drei";
 
 
 export const Plane = () => {
@@ -13,10 +13,15 @@ export const Plane = () => {
             ref={ref}
         >
             <planeGeometry attach={"geometry"} args={[15, 15]} />
-            <meshStandardMaterial
+            <meshBasicMaterial
                 attach={"material"}
-                color={"lightblue"}
-            />
+            >
+                <GradientTexture
+                    stops={[0, 1]} // As many stops as you want
+                    colors={['aquamarine', 'hotpink']} // Colors need to match the number of stops
+                    size={1024} // Size is optional, default = 1024
+                />
+            </meshBasicMaterial>
         </mesh>
         )
 

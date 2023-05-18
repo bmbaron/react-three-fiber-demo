@@ -9,12 +9,6 @@ import {Plane} from "./3dComponents/Plane";
 
 export default function App() {
 
-    const size = 2;
-
-    const logKey = (e: any) => {
-        alert('hell')
-    }
-
     return (
         <Container>
             <KeyboardControls map={[
@@ -26,11 +20,10 @@ export default function App() {
             ]}>
                 <Canvas shadows>
                     <Environment files="./mud_road_puresky_1k.hdr" background blur={0} />
-                    <PerspectiveCamera makeDefault position={[0, 10, 20]} fov={60} rotation={[0, 0.4, 0]} />
+                    <PerspectiveCamera makeDefault position={[0, 0, 15]} fov={60} rotation={[0, 0.4, 0]} />
                     <ambientLight />
                     <pointLight
                         castShadow
-                        shadowCameraVisible
                         position={[0, 10, 0]}
                         intensity={2}
                         color="white"
