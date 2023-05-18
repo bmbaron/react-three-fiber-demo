@@ -26,8 +26,8 @@ export default function App() {
             ]}>
                 <Canvas shadows>
                     <Environment files="./mud_road_puresky_1k.hdr" background blur={0} />
-                    <PerspectiveCamera makeDefault position={[0, 10, 20]} fov={50} rotation={[0, 0.4, 0]} />
-                    {/*<ambientLight />*/}
+                    <PerspectiveCamera makeDefault position={[0, 10, 20]} fov={60} rotation={[0, 0.4, 0]} />
+                    <ambientLight />
                     <pointLight
                         castShadow
                         shadowCameraVisible
@@ -39,7 +39,7 @@ export default function App() {
                     {/*<Stars />*/}
                     {/*<FrenchCoatHanger color="#fff" scale={0.1}/>*/}
                     <Physics>
-                        <RotatingBox data={{size: 2, castShadow: true}}/>
+                        <RotatingBox data={{size: 1, castShadow: true}}/>
                         <Plane />
                     </Physics>
                     <OrbitControls enableDamping={false} />

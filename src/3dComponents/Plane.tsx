@@ -3,7 +3,8 @@ import {usePlane} from "@react-three/cannon";
 
 
 export const Plane = () => {
-    const [ref] = usePlane<any>(() => ({rotation: [-Math.PI / 2, 0, 0]}));
+    const [ref] = usePlane<any>(() => ({rotation: [-Math.PI / 2, 0, 0],
+        position: [0,-5,0]}));
     return (
         <mesh
             position={[0, 0, 0]}
@@ -11,7 +12,7 @@ export const Plane = () => {
             receiveShadow={true}
             ref={ref}
         >
-            <planeGeometry attach={"geometry"} args={[30, 30]} />
+            <planeGeometry attach={"geometry"} args={[15, 15]} />
             <meshStandardMaterial
                 attach={"material"}
                 color={"lightblue"}
