@@ -1,27 +1,32 @@
 import {usePlane} from "@react-three/cannon";
 import {GradientTexture} from "@react-three/drei";
 
-
-export const Plane = () => {
-    const [ref] = usePlane<any>(() => ({rotation: [-Math.PI / 2, 0, 0],
-        position: [0,-5,0]}));
+export const Plane = ({rotation, position, gradient}) => {
+    const [ref] = usePlane<any>(() => ({
+        rotation: rotation,
+        position: position,
+    }));
     return (
         <mesh
-            position={[0, 0, 0]}
-            rotation={[-Math.PI / 2, 0, 0]}
+            position={position}
+            rotation={rotation}
             receiveShadow={true}
             ref={ref}
         >
-            <planeGeometry attach={"geometry"} args={[15, 15]} />
-            <meshBasicMaterial
+            <boxGeometry attach={"geometry"} args={[15, 15, 0]} />
+            <meshPhongMaterial
                 attach={"material"}
+                color={!gradient ? 'maroon' : 'none'}
+                // opacity={transparent ? 0.1 : 1}
             >
-                <GradientTexture
-                    stops={[0, 1]} // As many stops as you want
-                    colors={['aquamarine', 'hotpink']} // Colors need to match the number of stops
-                    size={1024} // Size is optional, default = 1024
-                />
-            </meshBasicMaterial>
+                {gradient &&
+                    <GradientTexture
+                        stops={[0, 1]} // As many stops as you want
+                        colors={['black', 'maroon']} // Colors need to match the number of stops
+                        size={1024} // Size is optional, default = 1024
+                    />
+                }
+            </meshPhongMaterial>
         </mesh>
         )
 

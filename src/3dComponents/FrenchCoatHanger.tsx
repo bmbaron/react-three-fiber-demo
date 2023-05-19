@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useGLTF } from "@react-three/drei";
+import {useBox, useConvexPolyhedron, useCylinder} from "@react-three/cannon";
 
 type FrenchCoatHangerProps = {
     color: string,
@@ -9,8 +10,10 @@ type FrenchCoatHangerProps = {
 }
 export function FrenchCoatHanger({ color, ...props }: FrenchCoatHangerProps) {
     const { nodes, materials } = useGLTF("./public/french_coat_hanger.glb");
+    const [ref3, api3] = useBox <any>(() => ({mass: 0.05}));
+
     return (
-        <group {...props} dispose={null}>
+        <group {...props} dispose={null} ref={ref3}>
             <group rotation={[-Math.PI / 2, 0, 0]}>
                 <mesh
                     castShadow
