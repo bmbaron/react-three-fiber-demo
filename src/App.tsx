@@ -35,10 +35,10 @@ export default function App() {
                     {/*<Sparkles scale={5} count={100} size={3} noise={2} speed={2}/>*/}
                     {/*<Stars />*/}
                     <Suspense fallback={null}>
-                        <Physics>
-                            {/*<RotatingBox data={{size: 1, castShadow: true}}/>*/}
+                        <Physics gravity={[0, -50, 0]} friction={1e-3}>
+                            {/*<RotatingBox data={{castShadow: true}}/>*/}
                             {/*<Debug color={"black"} scale={1}>*/}
-                                <SphereGenerator />
+                            <SphereGenerator />
 
                             <Plane rotation={[-Math.PI / 2, 0, 0]} position={[0, -7.5, 0]} />
                                 <Plane rotation={[0, 0, 0]} position={[0, 0, -7.5]} gradient />

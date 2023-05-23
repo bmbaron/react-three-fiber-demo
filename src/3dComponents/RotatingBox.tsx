@@ -42,9 +42,10 @@ export const RotatingBox = ({data}: RotatingBoxProps) => {
 
     return (
         <RoundedBox
-            position={[0,0,0]}
+            position={[100,100,100]}
             ref={refBox}
             args={[size || 1, size || 1, size || 1]}
+            scale={3}
             radius={0.1}
             // rotation-x={Math.PI * 0.25}
             // rotation-y={Math.PI * 0.25}

@@ -18,13 +18,13 @@ export const SphereGenerator = () => {
 
     useFrame(() => {
         apiSphere.position.subscribe((pos) => {
-            if (pos[1] > -4) {
+            if (pos[1] > -6) {
                 setIsFloating(true);
             }
             else setIsFloating(false);
         })
-        if (checkMovement(getKeys, refSphere, isFloating)) {
-            apiSphere.velocity.set(...checkMovement(getKeys, refSphere, isFloating))
+        if (checkMovement(getKeys, refSphere, isFloating, 10)) {
+            apiSphere.velocity.set(...checkMovement(getKeys, refSphere, isFloating, 20))
         }
     });
 

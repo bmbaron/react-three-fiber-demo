@@ -13,7 +13,7 @@ export const Plane = ({rotation, position, gradient}) => {
             receiveShadow={true}
             ref={ref}
         >
-            <boxGeometry attach={"geometry"} args={[15, 15, 0]} />
+            <boxGeometry attach={"geometry"} args={[15, 15, 0.1]} />
             <meshPhongMaterial
                 attach={"material"}
                 color={!gradient ? 'maroon' : 'none'}
